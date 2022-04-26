@@ -1,0 +1,37 @@
+--what is total money_in in the transactions table?
+SELECT SUM(money_in)
+FROM transactions;
+--total money-in = 17173.00
+
+--what is total money_out in the transactions table?
+SELECT SUM(money_out)
+FROM transactions;
+--total money-out = 33417.00
+
+--how many money-in transactions are there in the table?
+SELECT COUNT(money_in)
+FROM transactions;
+--money-in total count = 43
+
+--how many money-in transactions are there with 'BIT' as the currency?
+SELECT COUNT(money_in)
+FROM transactions
+WHERE currency = 'BIT';
+--money-in with 'BIT' = 21
+
+--what was the largest transaction in the whole table, money-in or money-out?
+SELECT MAX(money_in), MAX(money_out)
+FROM transactions;
+--max(money_in) = 6000.0 and max(money_out) = 15047.0
+
+--what is the average money_in for the currency Ethereum 'ETH'?
+SELECT ROUND(AVG(money_in), 2)
+FROM transactions
+WHERE currency = 'ETH';
+--avg(money_in) = 131.89
+
+--build a ledger for different dates
+SELECT date AS 'Date', ROUND(AVG(money_in), 2) AS 'Average In', ROUND(AVG(money_out), 2) AS 'Average Out'
+FROM transactions
+GROUP BY 1
+ORDER BY 1 DESC;
